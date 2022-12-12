@@ -1,23 +1,45 @@
-import logo from './logo.svg';
+
+import { useEffect, useState } from 'react';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import './App.css';
+import Main from './Layout/Main';
+import Blogs from './Pages/Blogs/Blogs';
+import Home from './Pages/Home/Home';
+import ProjectDetails from './Pages/ProjectDetails/ProjectDetails';
 
 function App() {
+  // const [project, setProject] = useState([]);
+  //   useEffect(() => {
+  //       fetch("projects.json")
+  //       .then(res => res.json())
+  //       .then(data => setProjects(data))
+  //   },[])
+  const router = createBrowserRouter([
+    {
+      path: "/",
+      element: <Main></Main>,
+      children: [
+        {
+          path: "/",
+          element: <Home></Home>
+        },
+        {
+          path: "/projects/:id",
+          element: <ProjectDetails></ProjectDetails>,
+          loader: ({params}) => fetch(`https://my-portfolio-server-azure.vercel.app/projects/${params.id}`)
+        },
+        {
+          path: "/blogs",
+          element: <Blogs></Blogs>
+        }
+      ]
+    },
+  ]);
+
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="">
+      <RouterProvider router={router}></RouterProvider>
     </div>
   );
 }
