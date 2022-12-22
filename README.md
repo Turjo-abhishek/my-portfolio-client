@@ -1,6 +1,6 @@
 # Getting Started with Create React App
 
-Live Site: [Live Site](https://taupe-klepon-8af63e.netlify.app/).
+Live Site: [My Portfolio](https://taupe-klepon-8af63e.netlify.app/).
 
 ## Available Scripts
 
